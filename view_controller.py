@@ -60,14 +60,14 @@ class ViewController(object):
         self.mdp.update_policy(policy)
 
     def _policy_iteration_100_steps(self):
-        policy_iteration(self.mdp, num_iter=100)
+        policy_iteration(self.mdp.policy, self.mdp, num_iter=100)
         self.gridworld.update_grid(self.mdp.values, self.mdp.policy)
 
     def _policy_iteration_slow(self):
         # run one iteration of policy iteration at a time
         old_policy = dict(self.mdp.policy)
         for i in range(100):
-            policy_iteration(self.mdp, num_iter=1)
+            policy_iteration(self.mdp.policy, self.mdp, num_iter=1)
             self.gridworld.update_grid(self.mdp.values, self.mdp.policy)
             self.gridworld.window.update()
             time.sleep(0.25)
